@@ -23,9 +23,11 @@ class Test_Login:
         self.PO_UL.enter_username(self.username)
         self.PO_UL.enter_password(self.password)
         self.PO_UL.click_login()
+        time.sleep(3)
         success_login_msg = self.driver.find_element(By.XPATH, '//*[@id="header_container"]/div[1]/div[2]/div').text
         if success_login_msg == 'Swag Labs':
             assert True
+            time.sleep(5)
             self.driver.close()
         else:
             self.driver.save_screenshot(".\\Screenshot\\test_user_login.png")
@@ -39,11 +41,14 @@ class Test_Login:
         self.PO_UL.enter_username(self.username)
         self.PO_UL.enter_password(self.password)
         self.PO_UL.click_login()
+        time.sleep(2)
         self.PO_UL.click_product_add_card()
         self.PO_UL.click_cart_icon()
+        time.sleep(3)
         success_add_cart_msg = self.driver.find_element(By.XPATH, '//*[@id="header_container"]/div[2]/span').text
         if success_add_cart_msg == 'Your Cart':
             assert True
+            time.sleep(5)
             self.driver.close()
         else:
             self.driver.save_screenshot(".\\Screenshot\\test_add_to_card.png")
@@ -58,17 +63,23 @@ class Test_Login:
         self.PO_UL.enter_username(self.username)
         self.PO_UL.enter_password(self.password)
         self.PO_UL.click_login()
+        time.sleep(3)
         self.PO_UL.click_product_add_card()
         self.PO_UL.click_cart_icon()
+        time.sleep(3)
         self.PO_UL.click_checkout()
         self.PO_UL.enter_name(self.name)
         self.PO_UL.enter_last_name(self.lastname)
         self.PO_UL.enter_postal_code(self.postal_code)
+        time.sleep(5)
         self.PO_UL.click_continue()
         self.PO_UL.click_finish()
+        time.sleep(5)
         order_success_msg = self.driver.find_element(By.XPATH, '//*[@id="checkout_complete_container"]/h2').text
         if order_success_msg=='Thank you for your order!':
             assert True
+            self.driver.save_screenshot(".\\Screenshot\\test_checkout_msg.png")
+            time.sleep(5)
             self.driver.close()
         else:
             self.driver.save_screenshot(".\\Screenshot\\test_checkout.png")
